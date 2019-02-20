@@ -1190,6 +1190,20 @@ int bpf_open_perf_event(uint32_t type, uint64_t config, int pid, int cpu) {
   return fd;
 }
 
+int bpf_attach_xdsp(const char *dev_name, int progfd, uint32_t flags) {
+        int dev_fd;
+        int ret;
+
+        dev_fd = open("/dev/test", O_RDONLY);
+        if (dev_fd < 0) {
+                printf("Failed to open block device '%s'\n", strerror(errno));
+                return -1;
+        }
+
+        ret = bpf_prog_attach(progfd, dev_fd, BPF_BLK_MAKE_RQ, 0);
+        return ret;
+}
+
 int bpf_attach_xdp(const char *dev_name, int progfd, uint32_t flags) {
     struct sockaddr_nl sa;
     int sock, seq = 0, len, ret = -1;
