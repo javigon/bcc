@@ -151,6 +151,9 @@ class BPF(object):
     RAW_TRACEPOINT = 17
     CGROUP_SOCK_ADDR = 18
 
+    # TODO
+    XDSP = 23
+
     # from xdp_action uapi/linux/bpf.h
     XDP_ABORTED = 0
     XDP_DROP = 1
